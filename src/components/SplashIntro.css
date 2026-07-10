@@ -1,0 +1,149 @@
+/* =================================================================
+   Splash Intro Animation — Light Sky Theme
+   ================================================================= */
+.splash-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg);
+  transition: opacity 0.8s ease-in-out;
+}
+
+.splash-container.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Background overlay (optional dark/night sky before the blast) */
+.splash-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+  animation: bg-fade 1.5s 1.5s forwards;
+}
+
+@keyframes bg-fade {
+  to { opacity: 0; }
+}
+
+/* Falling Meteor */
+.splash-meteor-wrap {
+  position: absolute;
+  top: -20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: fall 1s cubic-bezier(0.5, 0, 1, 0.5) forwards;
+  z-index: 10;
+}
+
+.splash-meteor-wrap.impacted {
+  opacity: 0;
+}
+
+.splash-meteor {
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 40px 10px #38bdf8, 0 0 100px 30px #0284c7;
+  position: relative;
+  z-index: 2;
+}
+
+.splash-tail {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 400px;
+  background: linear-gradient(to top, rgba(56,189,248,1), transparent);
+  filter: blur(4px);
+  z-index: 1;
+}
+
+@keyframes fall {
+  0% { transform: translate(-50%, 0) scale(0.5); }
+  100% { transform: translate(-50%, 80vh) scale(1.5); }
+}
+
+/* Blast / Explosion Effect */
+.splash-blast {
+  position: absolute;
+  top: 80vh;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  box-shadow: 0 0 100px 50px #38bdf8, 0 0 200px 100px #0284c7;
+  animation: blast-expand 0.8s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+  z-index: 5;
+}
+
+.splash-blast.receding {
+  animation: blast-recede 1s ease-out forwards;
+}
+
+@keyframes blast-expand {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  50% { opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(300); opacity: 1; background: var(--bg); }
+}
+
+@keyframes blast-recede {
+  0% { transform: translate(-50%, -50%) scale(300); opacity: 1; background: var(--bg); }
+  100% { transform: translate(-50%, -50%) scale(300); opacity: 0; }
+}
+
+/* Text Reveal */
+.splash-text-wrap {
+  position: relative;
+  z-index: 20;
+  text-align: center;
+}
+
+.splash-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.splash-title-1 {
+  font-family: var(--font-head);
+  font-size: clamp(48px, 8vw, 80px);
+  font-weight: 800;
+  color: var(--heading);
+  letter-spacing: -0.04em;
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+  animation: text-reveal 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.splash-title-2 {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 2vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: text-reveal-sub 1s 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes text-reveal {
+  0% { opacity: 0; transform: scale(0.8) translateY(20px); filter: blur(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+
+@keyframes text-reveal-sub {
+  0% { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}

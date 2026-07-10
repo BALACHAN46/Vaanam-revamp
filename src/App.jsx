@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -7,6 +8,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
+import SplashIntro from './components/SplashIntro';
 
 function NotFound() {
   return (
@@ -22,8 +24,15 @@ function NotFound() {
 }
 
 export default function App() {
+  // Check if intro has already played in this session
+  const [showIntro, setShowIntro] = useState(
+    !sessionStorage.getItem('vaanamIntroPlayed')
+  );
+
   return (
-    <BrowserRouter>
+    <>
+      {showIntro && <SplashIntro onComplete={() => setShowIntro(false)} />}
+      <BrowserRouter>
       <ScrollToTop />
       <Navbar />
       <Routes>
@@ -35,6 +44,7 @@ export default function App() {
         <Route path="*"          element={<NotFound />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+      </BrowserRouter>
+    </>
   );
 }

@@ -1,0 +1,193 @@
+/* Portfolio Page — Light Theme */
+.pf-stats {
+  background: white;
+  border-top: 1px solid rgba(14,165,233,0.12);
+  border-bottom: 1px solid rgba(14,165,233,0.12);
+  padding: var(--sp-xl) 0;
+}
+.pf-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-md);
+}
+.pf-stat-card {
+  padding: var(--sp-xl) var(--sp-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-sm);
+  background: white; border-color: rgba(14,165,233,0.12);
+}
+.pf-stat-icon { font-size: 32px; }
+.pf-stat-num {
+  font-family: var(--font-head);
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+.pf-stat-label { font-size: 14px; color: var(--text-muted); font-weight: 600; }
+
+/* Products showcase */
+.products-showcase { background: var(--bg-2); }
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-lg);
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-2xl);
+  padding: var(--sp-xl);
+  align-items: start;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  border-color: rgba(14,165,233,0.15);
+}
+
+.product-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--pc, var(--blue));
+  opacity: 0;
+  transition: var(--t-base);
+}
+.product-row:hover::before { opacity: 1; }
+
+.product-row__left {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-lg);
+}
+
+.product-row__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.product-row__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  margin-bottom: 8px;
+}
+
+.product-row__tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--r-full);
+  border: 1px solid;
+}
+
+.product-status {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--r-full);
+}
+.product-status.live {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #059669;
+}
+.product-status.beta {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #d97706;
+}
+
+.product-row__name {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--heading);
+  margin-bottom: 8px;
+}
+
+.product-row__desc {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.75;
+  max-width: 600px;
+}
+
+.product-row__right {
+  flex-shrink: 0;
+  min-width: 180px;
+}
+
+.product-row__tech-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-sm);
+}
+
+.product-row__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tech-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  color: var(--blue-dark);
+}
+
+/* Client Delivery Banner */
+.client-delivery { background: white; }
+.cd-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xl);
+  padding: var(--sp-2xl);
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%) !important;
+  border-color: rgba(14,165,233,0.2) !important;
+}
+.cd-banner__icon { font-size: 56px; flex-shrink: 0; }
+.cd-banner__title {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 800; color: var(--heading);
+  margin-bottom: var(--sp-sm);
+}
+.cd-banner__sub {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.75;
+  max-width: 680px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .product-row { grid-template-columns: 1fr; }
+  .product-row__right { border-top: 1px solid rgba(14,165,233,0.15); padding-top: var(--sp-lg); }
+}
+@media (max-width: 768px) {
+  .pf-stats__grid { grid-template-columns: repeat(2, 1fr); }
+  .cd-banner { flex-direction: column; text-align: center; }
+  .product-row__left { flex-direction: column; }
+}
+@media (max-width: 480px) {
+  .pf-stats__grid { grid-template-columns: repeat(2, 1fr); }
+}
